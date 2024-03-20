@@ -61,7 +61,7 @@ export default function Home() {
       console.log('data', data)
       // we can check if user is already registered in the db the dont call addDataToFireStore()
       const userData = await fetchUserData(uid)
-      if(userData.length === 1){
+      if(userData.length < 1){
         const insetResp = await addDataToFireStore(data)
       console.log('insetResp', insetResp)
       if(insetResp){
