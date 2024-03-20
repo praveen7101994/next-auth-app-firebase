@@ -40,7 +40,7 @@ export default function Home() {
     if(id){
       const snap = await getDocs(collection(db, 'user'))
     snap.forEach(doc => {
-      data.push({id: doc.id, ...doc.data()})
+      users.push({id: doc.id, ...doc.data()})
     });
   }
   return users
