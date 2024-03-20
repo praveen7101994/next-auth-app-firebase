@@ -61,7 +61,8 @@ export default function Home() {
       console.log('data', data)
       // we can check if user is already registered in the db the dont call addDataToFireStore()
       const userData = await fetchUserData(uid)
-      if(userData.length < 1){
+      console.log('userData',userData)
+      if(userData.length === 0){
         const insetResp = await addDataToFireStore(data)
       console.log('insetResp', insetResp)
       if(insetResp){
@@ -69,11 +70,14 @@ export default function Home() {
       } else {
         alert('Something went wrong.')
       }
+      } else {
+        router.push(`/profile?uid=${userData[0].uid}&&level=${userData[0].level}`)
       }
     }
     }
     execute()
   },[user])
+  
   return (
     <center>
       <h1>Registration Page</h1>
