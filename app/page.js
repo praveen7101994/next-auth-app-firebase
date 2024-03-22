@@ -80,6 +80,22 @@ export default function Home() {
     execute();
   }, [user]);
 
+  useEffect(() => {
+    const handleStorageChange = () => {
+      console.log("Session storage changed:", sessionStorage);
+      const sessionData = sessionStorage.getItem("user");
+      const user = JSON.parse(sessionData);
+      if (!user.uid) {
+        router.push("/");
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
   return (
     <center>
       <h1>Registration Page</h1>
